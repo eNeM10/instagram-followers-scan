@@ -29,3 +29,18 @@ for follower in followersList:
     followersFile.write(follower + "\n")
 
 followersFile.close()
+
+followeesList = []
+
+for followee in profile.get_followees():
+    followeesList.append(followee.username)
+
+print("Followees list obtained")
+
+followeesFile = open("my_followees.txt", "a+")
+followeesFile.truncate(0)
+
+for follower in followeesList:
+    followeesFile.write(follower + "\n")
+
+followeesFile.close()
