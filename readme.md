@@ -30,33 +30,33 @@ You can also get filtered list of users that are your:
 
 * Enter your *instagram username*
 
-    ```python
+    ```text
     Enter your Instagram username: abc123
     ```
 
 * If will try to find a saved session for the entered user. If not found it will ask you to enter your password to login
 
-    ```python
+    ```text
     Enter Instagram password for abc123:
     ```
 
 * After successful login you can choose to save the login information locally for ease
 
-    ```python
+    ```text
     Save login information locally? (y/n): y
     ```
 
     This will save your current session to a file that would be saved in ``C:\Users\your_username\AppData\Local\Instaloader``.
 * Enter the username of the account you want to scan.It must be a public account. Incase of a private account it must be followed by you. If you want to scan your own account then enter your username.
 
-    ```python
+    ```text
     Target account must be public. Data of private accounts can be fetched if you follow them.
     Enter target account username: abc123
     ```
 
 * The followers and followings of the account will be fetched. You can choose to them to files.
 
-    ```python
+    ```text
     Fetching followers...
     Followers list obtained!
 
@@ -70,7 +70,7 @@ You can also get filtered list of users that are your:
 
 * You will get the following menu after followers and followings are fetched
 
-    ```python
+    ```text
     MENU:
     1. Get friends (followers that you follow back)
     2. Get fans (followers that you don't follow back)
