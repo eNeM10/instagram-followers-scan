@@ -67,3 +67,64 @@ if saveToFile == "y" or saveToFile == "Y":
 
     print("Followees list saved!")
 
+while True:
+    print("\n\nMENU:")
+    print("1. Get friends (followers that you follow back)")
+    print("2. Get fans (followers that you don't follow back)")
+    print("3. Get stars ;) (followees that don't follow you back)")
+    print("0. Exit")
+
+    choice = input("\nEnter your choice: ")
+
+    if choice == '0':
+        print("\nExiting...")
+        exit()
+    elif choice == '1':
+        mutual = list(set(followersList).intersection(followeesList))
+        print("\nNumber of followers that you follow back: " + str(len(mutual)))
+        print(mutual)
+        saveToFile = input("\nSave fans to file? (y/n): ")
+        if saveToFile == "y" or saveToFile == "Y":
+            mutualFile = open("%s-mutual.txt" % targetUsername, "w")
+            mutualFile.truncate(0)
+
+            for follower in mutual:
+                mutualFile.write(follower + "\n")
+
+            mutualFile.close()
+
+            print("Fans list saved!")
+    elif choice == '2':
+        fans = list(set(followersList).difference(set(followeesList)))
+        print("\nNumber of people that you don't follow back: " + str(len(fans)))
+        print(fans)
+        saveToFile = input("\nSave fans to file? (y/n): ")
+        if saveToFile == "y" or saveToFile == "Y":
+            fansFile = open("%s-fans.txt" % targetUsername, "w")
+            fansFile.truncate(0)
+
+            for follower in fans:
+                fansFile.write(follower + "\n")
+
+            fansFile.close()
+
+            print("Fans list saved!")
+    elif choice == '3':
+        nonFollowers = list(set(followeesList).difference(set(followersList)))
+        print("\nNumber of people that don't follow back: " +
+              str(len(nonFollowers)))
+        print(nonFollowers)
+        saveToFile = input("\nSave non followers to file? (y/n): ")
+        if saveToFile == "y" or saveToFile == "Y":
+            nonFollowersFile = open("%s-nonfollowers.txt" %
+                                    targetUsername, "w")
+            nonFollowersFile.truncate(0)
+
+            for followee in nonFollowers:
+                nonFollowersFile.write(followee + "\n")
+
+            nonFollowersFile.close()
+
+            print("Followers list saved!")
+    else:
+        print("Invalid choice! Try again.")
