@@ -21,3 +21,11 @@ for follower in profile.get_followers():
 
 print("Followers list obtained")
 print("Followers: " + str(len(followersList)))
+
+followersFile = open("my_followers.txt", "a+")
+followersFile.truncate(0)
+
+for follower in followersList:
+    followersFile.write(follower + "\n")
+
+followersFile.close()
