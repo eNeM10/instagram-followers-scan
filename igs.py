@@ -1,28 +1,40 @@
-import os
-from dotenv import load_dotenv
 import instaloader
-
-load_dotenv()
-
-username = os.environ.get('userid')
-password = os.environ.get('password')
 
 L = instaloader.Instaloader()
 
+userID = input("Enter your Instagram username: ")
 
-L.login(username, password)
+try:
+    L.load_session_from_file(userID)
+except:
+    try:
+        L.interactive_login(userID)
+    except:
+        print("Error: Login Failed!")
+        exit()
+    else:
+        saveSession = input("Save login information locally? (y/n): ")
+        if saveSession == "y" or saveSession == "Y":
+            L.save_session_to_file()
 
-profile = instaloader.Profile.from_username(L.context, r'ntx23')
+print("\nTarget account must be public. Data of private accounts can be fetched if you follow them.")
+targetUsername = input("Enter target account username: ")
+
+print("Searching...")
+profile = instaloader.Profile.from_username(L.context, targetUsername)
+print("Account (%s) found!" % targetUsername)
 
 followersList = []
+followeesList = []
+
+print("\nFetching followers...")
 
 for follower in profile.get_followers():
     followersList.append(follower.username)
 
-print("Followers list obtained")
-print("Followers: " + str(len(followersList)))
+print("Followers list obtained!")
 
-followersFile = open("my_followers.txt", "a+")
+followersFile = open("%s-followers.txt" % targetUsername, "a+")
 followersFile.truncate(0)
 
 for follower in followersList:
@@ -30,17 +42,21 @@ for follower in followersList:
 
 followersFile.close()
 
-followeesList = []
+print("Followers list saved!")
+
+print("\nFetching followees...")
 
 for followee in profile.get_followees():
     followeesList.append(followee.username)
 
-print("Followees list obtained")
+print("Followees list obtained!")
 
-followeesFile = open("my_followees.txt", "a+")
+followeesFile = open("%s-followings.txt" % targetUsername, "a+")
 followeesFile.truncate(0)
 
 for follower in followeesList:
     followeesFile.write(follower + "\n")
 
 followeesFile.close()
+
+print("Followees list saved!")
