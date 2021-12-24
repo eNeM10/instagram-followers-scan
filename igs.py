@@ -22,7 +22,11 @@ targetUsername = input("Enter target account username: ")
 
 print("Searching...")
 profile = instaloader.Profile.from_username(L.context, targetUsername)
-print("Account (%s) found!" % targetUsername)
+foundUserName = profile.full_name
+if foundUserName is None or foundUserName == "":
+    foundUserName = "@" + profile.username
+print("Account found (%s)!" % foundUserName)
+
 
 followersList = []
 followeesList = []
@@ -34,16 +38,6 @@ for follower in profile.get_followers():
 
 print("Followers list obtained!")
 
-followersFile = open("%s-followers.txt" % targetUsername, "a+")
-followersFile.truncate(0)
-
-for follower in followersList:
-    followersFile.write(follower + "\n")
-
-followersFile.close()
-
-print("Followers list saved!")
-
 print("\nFetching followees...")
 
 for followee in profile.get_followees():
@@ -51,12 +45,25 @@ for followee in profile.get_followees():
 
 print("Followees list obtained!")
 
-followeesFile = open("%s-followings.txt" % targetUsername, "a+")
-followeesFile.truncate(0)
+saveToFile = input("\nSave followers and followings to file? (y/n): ")
+if saveToFile == "y" or saveToFile == "Y":
+    followersFile = open("%s-followers.txt" % targetUsername, "w")
+    followersFile.truncate(0)
 
-for follower in followeesList:
-    followeesFile.write(follower + "\n")
+    for follower in followersList:
+        followersFile.write(follower + "\n")
 
-followeesFile.close()
+    followersFile.close()
 
-print("Followees list saved!")
+    print("Followers list saved!")
+
+    followeesFile = open("%s-followings.txt" % targetUsername, "w")
+    followeesFile.truncate(0)
+
+    for follower in followeesList:
+        followeesFile.write(follower + "\n")
+
+    followeesFile.close()
+
+    print("Followees list saved!")
+
