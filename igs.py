@@ -47,7 +47,7 @@ print("Followees list obtained!")
 
 saveToFile = input("\nSave followers and followings to file? (y/n): ")
 if saveToFile == "y" or saveToFile == "Y":
-    followersFile = open("%s-followers.txt" % targetUsername, "w")
+    followersFile = open("op-%s-followers.txt" % targetUsername, "w")
     followersFile.truncate(0)
 
     for follower in followersList:
@@ -57,7 +57,7 @@ if saveToFile == "y" or saveToFile == "Y":
 
     print("Followers list saved!")
 
-    followeesFile = open("%s-followings.txt" % targetUsername, "w")
+    followeesFile = open("op-%s-followings.txt" % targetUsername, "w")
     followeesFile.truncate(0)
 
     for follower in followeesList:
@@ -82,10 +82,11 @@ while True:
     elif choice == '1':
         mutual = list(set(followersList).intersection(followeesList))
         print("\nNumber of followers that you follow back: " + str(len(mutual)))
-        print(mutual)
+        print("Mutual followers: " + str((', '.join(mutual))))
+        # print(mutual)
         saveToFile = input("\nSave fans to file? (y/n): ")
         if saveToFile == "y" or saveToFile == "Y":
-            mutualFile = open("%s-mutual.txt" % targetUsername, "w")
+            mutualFile = open("op-%s-mutual.txt" % targetUsername, "w")
             mutualFile.truncate(0)
 
             for follower in mutual:
@@ -97,10 +98,11 @@ while True:
     elif choice == '2':
         fans = list(set(followersList).difference(set(followeesList)))
         print("\nNumber of people that you don't follow back: " + str(len(fans)))
-        print(fans)
+        print("Fans: " + str((', '.join(fans))))
+        # print(fans)
         saveToFile = input("\nSave fans to file? (y/n): ")
         if saveToFile == "y" or saveToFile == "Y":
-            fansFile = open("%s-fans.txt" % targetUsername, "w")
+            fansFile = open("op-%s-fans.txt" % targetUsername, "w")
             fansFile.truncate(0)
 
             for follower in fans:
@@ -113,10 +115,11 @@ while True:
         nonFollowers = list(set(followeesList).difference(set(followersList)))
         print("\nNumber of people that don't follow back: " +
               str(len(nonFollowers)))
-        print(nonFollowers)
+        print("Non-followers: " + str((', '.join(nonFollowers))))
+        # print(nonFollowers)
         saveToFile = input("\nSave non followers to file? (y/n): ")
         if saveToFile == "y" or saveToFile == "Y":
-            nonFollowersFile = open("%s-nonfollowers.txt" %
+            nonFollowersFile = open("op-%s-nonfollowers.txt" %
                                     targetUsername, "w")
             nonFollowersFile.truncate(0)
 

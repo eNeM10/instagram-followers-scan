@@ -14,7 +14,8 @@ You can also get filtered list of users that are your:
 ## Prerequisite
 
 * Must have Python installed
-* Install Instaloader
+* Ensure that you have Python, at least version 3.6, and pip installed.
+  Install Instaloader
 
     ```bash
     pip3 install instaloader
