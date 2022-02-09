@@ -35,7 +35,7 @@ You can also get filtered list of users that are your:
     Enter your Instagram username: abc123
     ```
 
-* If will try to find a saved session for the entered user. If not found it will ask you to enter your password to login
+* It will try to find a saved session for the entered user. If not found it will ask you to enter your password to login
 
     ```text
     Enter Instagram password for abc123:
